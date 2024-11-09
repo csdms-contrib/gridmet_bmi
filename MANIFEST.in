@@ -1,3 +1,0 @@
-include versioneer.py
-include gridmet_bmi/_version.py
-

@@ -1,7 +1,5 @@
 from setuptools import setup, find_packages
 
-import versioneer
-
 
 def read_requirements():
     import os
@@ -19,8 +17,7 @@ def read_requirements():
 
 setup(
     name="gridmet_bmi",
-    version=versioneer.get_version(),
-    cmdclass=versioneer.get_cmdclass(),
+    version="0.2.dev0",
     description="Fetch gridMET meteorological data",
     author="Richard McDonald and Eric Hutton",
     author_email="rmcd@usgs.gov",
