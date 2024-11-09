@@ -1,0 +1,117 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gridmet_bmi"
+description = "Fetch gridMET meteorological data"
+authors = [
+  {name = "Richard McDonald", email = "rmcd@usgs.gov"},
+]
+maintainers = [
+  {name = "Mark Piper", email = "mark.piper@colorado.edu"},
+  {name = "Eric Hutton", email = "eric.hutton@colorado.edu"},
+]
+keywords = [
+  "bmi",
+  "gridmet",
+  "data",
+  "meteorology",
+  "usgs",
+  "csdms",
+]
+license = {text = "CC0-1.0 License"}
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "License :: OSI Approved :: CC0-1.0 License",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Education",
+]
+requires-python = ">=3.10"
+dependencies = [
+  "bmipy",
+  "click",
+  "numpy",
+  "pyyaml",
+  "requests",
+  "xarray",
+]
+dynamic = ["readme", "version"]
+
+[project.urls]
+Homepage = "https://usgs.gov"
+Repository = "https://github.com/csdms-contrib/gridmet_bmi"
+
+[project.optional-dependencies]
+dev = [
+  "make",
+]
+build = [
+  "build",
+  "twine",
+  "zest.releaser"
+]
+testing = [
+  "pytest",
+  "pytest-cov",
+  "pytest-datadir",
+  "coverage",
+  "coveralls",
+]
+examples = [
+  "matplotlib",
+]
+notebooks = [
+  "geopandas",
+  "matplotlib",
+  "rasterio",
+]
+
+[project.scripts]
+gridmet_bmi = "gridmet_bmi.cli:main"
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md", "CREDITS.md", "LICENSE.md"], content-type = "text/markdown"}
+version = {attr = "gridmet_bmi._version.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gridmet_bmi*"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["gridmet_bmi", "tests"]
+norecursedirs = [".*", "*.egg*", "build", "dist"]
+addopts = """
+  --tb native
+  --strict-markers
+  --durations 16
+  --doctest-modules
+  -vvv
+  --ignore-glob=examples/*.py
+"""
+doctest_optionflags = [
+  "NORMALIZE_WHITESPACE",
+  "IGNORE_EXCEPTION_DETAIL",
+  "ALLOW_UNICODE"
+]
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+combine_as_imports = true
+line_length = 88
+
+[tool.coverage.run]
+relative_files = true
+
+[tool.zest-releaser]
+tag-format = "v{version}"
+python-file-with-version = "gridmet_bmi/_version.py"
