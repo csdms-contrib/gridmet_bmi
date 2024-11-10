@@ -45,7 +45,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          make test
+          pytest
 
       - name: Test BMI
         if: ${{ matrix.python-version == '3.12' }}
