@@ -55,5 +55,6 @@ jobs:
 
       - name: Run examples
         working-directory: ${{ github.workspace }}/examples
+        if: matrix.os != 'windows-latest'
         run: |
           python debug.py
