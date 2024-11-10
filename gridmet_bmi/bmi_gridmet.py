@@ -40,6 +40,7 @@ class BmiGridmet(Bmi):
         printing reports.
         """
         self._day = 0
+        self._model.dataset.close()
         self._model.clear_cache()
 
     def get_component_name(self) -> str:
