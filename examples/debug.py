@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from gridmet_bmi import BmiGridmet
 import numpy as np
 import numpy.testing as npt
@@ -22,9 +22,9 @@ print(x.get_input_var_names())
 print(x.get_output_var_names())
 grid_id = x.get_var_grid('daily_maximum_temperature')
 size = x.get_grid_size(grid_id)
-shape = np.empty(2, dtype=np.int)
-origin = np.empty(2, dtype=np.float)
-delta = np.empty(2, dtype=np.float)
+shape = np.empty(2, dtype=int)
+origin = np.empty(2, dtype=float)
+delta = np.empty(2, dtype=float)
 x.get_grid_origin(grid_id, origin)
 x.get_grid_spacing(grid_id, spacing=delta)
 tmp = x.get_grid_shape(grid_id, shape)
