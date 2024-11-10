@@ -65,7 +65,7 @@ def test_initialize_from_file():
     model.initialize(name)
 
     os.remove(name)
-    shape = np.empty(2, dtype=np.int)
+    shape = np.empty(2, dtype=int)
     tmp = model.get_grid_shape(0, shape)
     tmp2 = np.array([585, 1386])
     npt.assert_almost_equal(tmp, tmp2)
