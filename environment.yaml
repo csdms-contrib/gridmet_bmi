@@ -9,5 +9,6 @@ dependencies:
   - requests
   - netcdf4
   - xarray
-  - pandas
+  - geopandas
   - matplotlib
+  - rasterio
