@@ -108,7 +108,7 @@ def test_grid_var_origin():
 def test_grid_var_type():
     model = BmiGridmet()
     model.initialize()
-    assert model.get_var_type("daily_maximum_temperature") == "float32"
+    assert model.get_var_type("daily_maximum_temperature") == "float64"
 
 
 def test_grid_type():

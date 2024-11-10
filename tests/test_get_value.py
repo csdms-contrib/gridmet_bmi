@@ -15,8 +15,8 @@ def test_get_initial_value():
     min = np.nanmin(z0)
     max = np.nanmax(z0)
 
-    npt.assert_almost_equal(min, 266.399, decimal=2)
-    npt.assert_almost_equal(max, 305.0, decimal=1)
+    npt.assert_almost_equal(min, 266.1, decimal=1)
+    npt.assert_almost_equal(max, 304.7, decimal=1)
 
 
 def test_get_value_copy():

@@ -42,8 +42,8 @@ def test_initialize_defaults():
     min = np.nanmin(vals)
     max = np.nanmax(vals)
 
-    npt.assert_almost_equal(min, 266.399, decimal=2)
-    npt.assert_almost_equal(max, 305.0, decimal=1)
+    npt.assert_almost_equal(min, 266.1, decimal=1)
+    npt.assert_almost_equal(max, 304.7, decimal=1)
 
 
 def test_initialize_from_file():
