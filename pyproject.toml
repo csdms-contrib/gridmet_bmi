@@ -37,6 +37,7 @@ requires-python = ">=3.10"
 dependencies = [
   "bmipy",
   "click",
+  "netcdf4",
   "numpy",
   "pyyaml",
   "requests",
