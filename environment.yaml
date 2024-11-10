@@ -12,3 +12,5 @@ dependencies:
   - geopandas
   - matplotlib
   - rasterio
+  - pytest
+  - bmi-tester

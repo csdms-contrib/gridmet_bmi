@@ -61,6 +61,12 @@ pretty: ## reformat files to make them look pretty
 test: ## run tests quickly with the default Python
 	pytest --cov=gridmet_bmi
 
+test-bmi: ## test the component's BMI
+	bmi-test gridmet_bmi.bmi_gridmet:BmiGridmet \
+		--config-file=${PWD}/examples/gridmet_bmi.yaml \
+		--root-dir=examples \
+		-vvv
+
 benchmark: ## run benchmarks only
 	pytest --benchmark-only --benchmark-autosave
 

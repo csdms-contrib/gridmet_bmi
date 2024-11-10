@@ -59,6 +59,7 @@ build = [
   "zest.releaser"
 ]
 testing = [
+  "bmi-tester",
   "pytest",
   "pytest-cov",
   "pytest-datadir",
