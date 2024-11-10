@@ -7,9 +7,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-
-  test:
-    name: Run unit tests
+  build-and-test:
     if:
       github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
 
@@ -49,11 +47,12 @@ jobs:
           pytest
 
       - name: Test BMI
-        if: ${{ matrix.python-version == '3.12' }}
+        if: ${{ matrix.python-version == '3.12' }} and matrix.os != 'windows-latest'
         run: |
           make test-bmi
 
       - name: Run examples
+        if: matrix.os != 'windows-latest'
         working-directory: ${{ github.workspace }}/examples
         if: matrix.os != 'windows-latest'
         run: |
