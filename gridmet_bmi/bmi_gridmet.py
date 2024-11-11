@@ -40,7 +40,10 @@ class BmiGridmet(Bmi):
         printing reports.
         """
         self._day = 0
-        self._model.clear_cache()
+        try:
+            self._model.clear_cache()
+        except PermissionError as error:
+            print(error)
 
     def get_component_name(self) -> str:
         """Name of the component.
