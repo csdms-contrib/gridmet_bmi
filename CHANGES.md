@@ -2,7 +2,7 @@
 
 ## 0.2.0 (unreleased)
 
-- Nothing yet.
+- Update project metadata and continuous integration system (#2)
 
 
 ## 0.1 (2021-01-15)
