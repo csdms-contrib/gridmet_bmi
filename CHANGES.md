@@ -1,6 +1,6 @@
 # Changes for gridmet_bmi
 
-## 0.2.0 (unreleased)
+## 0.2.0 (2024-11-10)
 
 - Update project metadata and continuous integration system (#2)
 
