@@ -2,8 +2,7 @@
 
 ## 0.2.1 (unreleased)
 
-
-- Nothing changed yet.
+- Fix finalize on Windows (#3)
 
 
 ## 0.2.0 (2024-11-10)
