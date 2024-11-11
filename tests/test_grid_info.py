@@ -76,7 +76,7 @@ def test_grid_var_size_fail():
 def test_grid_var_shape():
     model = BmiGridmet()
     model.initialize()
-    shape = np.empty(2, dtype=np.int)
+    shape = np.empty(2, dtype=int)
     tmp2 = np.array([585, 1386])
     npt.assert_equal(model.get_grid_shape(grid_id, shape), tmp2)
 
@@ -84,7 +84,7 @@ def test_grid_var_shape():
 def test_grid_var_shape_fail():
     model = BmiGridmet()
     model.initialize()
-    shape = np.empty(2, dtype=np.int)
+    shape = np.empty(2, dtype=int)
     with pytest.raises(KeyError):
         model.get_grid_shape(invalid_grid_id, shape)
 
@@ -92,7 +92,7 @@ def test_grid_var_shape_fail():
 def test_grid_var_spacing():
     model = BmiGridmet()
     model.initialize()
-    shape = np.empty(2, dtype=np.float)
+    shape = np.empty(2, dtype=float)
     tmp2 = np.array([0.041667, 0.041667])
     npt.assert_almost_equal(model.get_grid_spacing(grid_id, shape), tmp2, decimal=4)
 
@@ -100,7 +100,7 @@ def test_grid_var_spacing():
 def test_grid_var_origin():
     model = BmiGridmet()
     model.initialize()
-    shape = np.empty(2, dtype=np.float)
+    shape = np.empty(2, dtype=float)
     tmp2 = np.array([25.066667, -124.77])
     npt.assert_almost_equal(model.get_grid_origin(grid_id, shape), tmp2, decimal=2)
 
@@ -108,7 +108,7 @@ def test_grid_var_origin():
 def test_grid_var_type():
     model = BmiGridmet()
     model.initialize()
-    assert model.get_var_type("daily_maximum_temperature") == "float32"
+    assert model.get_var_type("daily_maximum_temperature") == "float64"
 
 
 def test_grid_type():

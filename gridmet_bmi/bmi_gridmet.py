@@ -17,9 +17,13 @@ BmiGridUniformRectilinear = namedtuple(
 
 
 class BmiGridmet(Bmi):
-    _name = 'Gridmet_BMI'
-    _input_var_names = ('')
-    _output_var_names = ('daily_maximum_temperature', 'daily_minimum_temperature', 'precipitation_amount')
+    _name = "Gridmet_BMI"
+    _input_var_names = ""
+    _output_var_names = (
+        "daily_maximum_temperature",
+        "daily_minimum_temperature",
+        "precipitation_amount",
+    )
 
     def __init__(self):
         self._model = None
@@ -84,7 +88,7 @@ class BmiGridmet(Bmi):
         raise NotImplementedError("get_grid_edge_count")
 
     def get_grid_edge_nodes(
-            self, grid: int, edge_nodes: numpy.ndarray
+        self, grid: int, edge_nodes: numpy.ndarray
     ) -> numpy.ndarray:
         """Get the edge-node connectivity.
 
@@ -120,7 +124,7 @@ class BmiGridmet(Bmi):
         raise NotImplementedError("get_grid_face_count")
 
     def get_grid_face_edges(
-            self, grid: int, face_edges: numpy.ndarray
+        self, grid: int, face_edges: numpy.ndarray
     ) -> numpy.ndarray:
         """Get the face-edge connectivity.
 
@@ -139,7 +143,7 @@ class BmiGridmet(Bmi):
         raise NotImplementedError("get_grid_face_edges")
 
     def get_grid_face_nodes(
-            self, grid: int, face_nodes: numpy.ndarray
+        self, grid: int, face_nodes: numpy.ndarray
     ) -> numpy.ndarray:
         """Get the face-node connectivity.
 
@@ -175,7 +179,7 @@ class BmiGridmet(Bmi):
         raise NotImplementedError("get_grid_node_count")
 
     def get_grid_nodes_per_face(
-            self, grid: int, nodes_per_face: numpy.ndarray
+        self, grid: int, nodes_per_face: numpy.ndarray
     ) -> numpy.ndarray:
         """Get the number of nodes for each face.
 
@@ -465,11 +469,15 @@ class BmiGridmet(Bmi):
         # max = numpy.nanmax(tmp[int(self._day),:,:])
         # min = numpy.nanmin(tmp[int(self._day),:,:])
         # to make consistent with BMI origin lower left, Gridmet origin is upper left
-        dest[:] = numpy.flipud(self._data[name].values[int(self._day), :, :]).reshape(-1).copy()
+        dest[:] = (
+            numpy.flipud(self._data[name].values[int(self._day), :, :])
+            .reshape(-1)
+            .copy()
+        )
         return dest
 
     def get_value_at_indices(
-            self, name: str, dest: numpy.ndarray, inds: numpy.ndarray
+        self, name: str, dest: numpy.ndarray, inds: numpy.ndarray
     ) -> numpy.ndarray:
         """Get values at particular indices.
 
@@ -544,36 +552,40 @@ class BmiGridmet(Bmi):
     def get_var_location(self, name: str) -> str:
         """Get the grid element type that the a given variable is defined on.
 
-        The grid topology can be composed of *nodes*, *edges*, and *faces*.
+                The grid topology can be composed of *nodes*, *edges*, and *faces*.
 
-        *node*
-            A point that has a coordinate pair or triplet: the most
-            basic element of the topology.
+                *node*
+                    A point that has a coordinate pair or triplet: the most
+                    basic element of the topology.
 
-        *edge*
-            A line or curve bounded by two *nodes*.
+                *edge*
+                    A line or curve bounded by two *nodes*.
 
-        *face*
-            A plane or surface enclosed by a set of edges. In a 2D
-            horizontal application one may consider the word polygon,
-            but in the hierarchy of elements the word face is most common.
+                *face*
+                    A plane or surface enclosed by a set of edges. In a 2D
+                    horizontal application one may consider the word
+        polygon
+        ,
+                    but in the hierarchy of elements the word
+        face
+         is most common.
 
-        Parameters
-        ----------
-        name : str
-            An input or output variable name, a CSDMS Standard Name.
+                Parameters
+                ----------
+                name : str
+                    An input or output variable name, a CSDMS Standard Name.
 
-        Returns
-        -------
-        str
-            The grid location on which the variable is defined. Must be one of
-            `"node"`, `"edge"`, or `"face"`.
+                Returns
+                -------
+                str
+                    The grid location on which the variable is defined. Must be one of
+                    `"node"`, `"edge"`, or `"face"`.
 
-        Notes
-        -----
-        CSDMS uses the `ugrid conventions`_ to define unstructured grids.
+                Notes
+                -----
+                CSDMS uses the `ugrid conventions`_ to define unstructured grids.
 
-        .. _ugrid conventions: http://ugrid-conventions.github.io/ugrid-conventions
+                .. _ugrid conventions: http://ugrid-conventions.github.io/ugrid-conventions
         """
         return "node"
 
@@ -708,7 +720,7 @@ class BmiGridmet(Bmi):
         raise NotImplementedError("set_value")
 
     def set_value_at_indices(
-            self, name: str, inds: numpy.ndarray, src: numpy.ndarray
+        self, name: str, inds: numpy.ndarray, src: numpy.ndarray
     ) -> None:
         """Specify a new value for a model variable at particular indices.
 

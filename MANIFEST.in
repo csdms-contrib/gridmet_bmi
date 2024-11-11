@@ -1,3 +1,4 @@
-include versioneer.py
-include gridmet_bmi/_version.py
-
+include *.md
+include environment.yml
+include examples/*
+recursive-include tests *

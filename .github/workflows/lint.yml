@@ -1,0 +1,32 @@
+name: Lint
+
+on: [push, pull_request]
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+
+  lint:
+    name: Check for lint and format code to a standard style
+    if:
+      github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          python-version: 3.12
+          auto-activate-base: false
+
+      - name: Install black and flake8
+        run: pip install black flake8
+
+      - name: Format code
+        run: |
+          flake8 .
+          black .

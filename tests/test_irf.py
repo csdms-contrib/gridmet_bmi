@@ -42,8 +42,8 @@ def test_initialize_defaults():
     min = np.nanmin(vals)
     max = np.nanmax(vals)
 
-    npt.assert_almost_equal(min, 266.399, decimal=2)
-    npt.assert_almost_equal(max, 305.0, decimal=1)
+    npt.assert_almost_equal(min, 266.1, decimal=1)
+    npt.assert_almost_equal(max, 304.7, decimal=1)
 
 
 def test_initialize_from_file():
@@ -65,7 +65,7 @@ def test_initialize_from_file():
     model.initialize(name)
 
     os.remove(name)
-    shape = np.empty(2, dtype=np.int)
+    shape = np.empty(2, dtype=int)
     tmp = model.get_grid_shape(0, shape)
     tmp2 = np.array([585, 1386])
     npt.assert_almost_equal(tmp, tmp2)

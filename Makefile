@@ -52,15 +52,20 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 
 lint: ## check style with flake8
-
-	flake8 gridmet_bmi tests
+	flake8 gridmet_bmi tests examples
 
 pretty: ## reformat files to make them look pretty
-	find gridmet_bmi tests -name '*.py' | xargs isort
-	black setup.py gridmet_bmi tests
+	find gridmet_bmi tests examples -name '*.py' | xargs isort
+	black gridmet_bmi tests examples
 
 test: ## run tests quickly with the default Python
 	pytest --cov=gridmet_bmi
+
+test-bmi: ## test the component's BMI
+	bmi-test gridmet_bmi.bmi_gridmet:BmiGridmet \
+		--config-file=${PWD}/examples/gridmet_bmi.yaml \
+		--root-dir=examples \
+		-vvv
 
 benchmark: ## run benchmarks only
 	pytest --benchmark-only --benchmark-autosave
@@ -75,7 +80,6 @@ coverage: ## check code coverage quickly with the default Python
 	$(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
-
 	rm -f docs/api/gridmet_bmi.rst
 	rm -f docs/api/modules.rst
 	# sphinx-apidoc -o docs/api --separate --no-toc gridmet_bmi
@@ -88,12 +92,12 @@ servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
 release: dist ## package and upload a release
+	twine check dist/*
 	twine upload dist/*
 
 dist: clean ## builds source and wheel package
-	python setup.py sdist
-	python setup.py bdist_wheel
+	python -m build
 	ls -l dist
 
 install: clean ## install the package to the active Python's site-packages
-	python setup.py install
+	pip install .
