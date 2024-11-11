@@ -1,5 +1,11 @@
 # Changes for gridmet_bmi
 
+## 0.2.2 (unreleased)
+
+
+- Nothing changed yet.
+
+
 ## 0.2.1 (2024-11-11)
 
 - Fix finalize on Windows (#3)
