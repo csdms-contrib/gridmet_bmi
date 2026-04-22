@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Basic Model Interface (BMI) for the Diffusion model."""
+
 from collections import namedtuple
 from typing import Tuple
 
