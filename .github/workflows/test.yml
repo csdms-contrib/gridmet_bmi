@@ -52,4 +52,5 @@ jobs:
       - name: Run examples
         working-directory: ${{ github.workspace }}/examples
         run: |
+          pip install -e ..
           python debug.py
