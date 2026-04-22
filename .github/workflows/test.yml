@@ -8,8 +8,7 @@ concurrency:
 
 jobs:
   build-and-test:
-    if:
-      github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
 
     runs-on: ${{ matrix.os }}
 
@@ -37,18 +36,18 @@ jobs:
           conda info
           conda list
 
-      - name: Build and install package
+      - name: Install nox
         run: |
-          make install
+          pip install nox
 
       - name: Run unit tests
         run: |
-          pytest
+          nox -s test
 
       - name: Test BMI
         if: ${{ matrix.python-version == '3.12' }}
         run: |
-          make test-bmi
+          nox -s test-bmi
 
       - name: Run examples
         working-directory: ${{ github.workspace }}/examples
