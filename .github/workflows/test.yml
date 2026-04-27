@@ -40,9 +40,9 @@ jobs:
         run: |
           pip install nox
 
-      - name: Run unit tests
+      - name: Run unit tests (gridmet only, not BMI)
         run: |
-          nox -s test
+          nox -s test -- tests/test_gridmet.py
 
       - name: Test BMI
         if: ${{ matrix.python-version == '3.12' }}
