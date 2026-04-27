@@ -81,18 +81,15 @@ def build(session: nox.Session) -> None:
 
 @nox.session
 def release(session):
-    """Tag, build, and publish a new release to PyPI."""
+    """Tag, build, and publish to PyPI with zest.releaser."""
     session.install(".[build]")
     session.run("fullrelease")
 
 
 @nox.session(name="testpypi")
 def publish_testpypi(session: nox.Session) -> None:
-    """Build and upload to TestPyPI."""
-    session.install(".[build]")
-    session.run("python", "-m", "build")
-    session.install("twine")
-    session.run("twine", "check", "dist/*")
+    """Build and upload to TestPyPI with twine."""
+    build(session)
     session.run(
         "twine",
         "upload",
@@ -105,11 +102,8 @@ def publish_testpypi(session: nox.Session) -> None:
 
 @nox.session(name="pypi")
 def publish_pypi(session: nox.Session) -> None:
-    """Build and upload to PyPI."""
-    session.install(".[build]")
-    session.run("python", "-m", "build")
-    session.install("twine")
-    session.run("twine", "check", "dist/*")
+    """Build and upload to PyPI with twine."""
+    build(session)
     session.run(
         "twine",
         "upload",
@@ -149,6 +143,6 @@ def clean(session: nox.Session) -> None:
 
 @nox.session(python=False)
 def nuke(session: nox.Session) -> None:
-    """Clean and remove session environments."""
+    """Remove session environments."""
     clean(session)
     shutil.rmtree(".nox", ignore_errors=True)
