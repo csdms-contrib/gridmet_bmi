@@ -19,6 +19,7 @@ nox.options.sessions = ["lint", "test"]
 
 @nox.session
 def test(session: nox.Session) -> None:
+    """Run the tests."""
     session.install(".[testing]")
 
     args = [
@@ -39,6 +40,7 @@ def test(session: nox.Session) -> None:
 
 @nox.session(name="test-bmi")
 def test_bmi(session: nox.Session) -> None:
+    """Test the BMI with bmi-tester."""
     session.install("bmi-tester")
     session.install(".[testing]")
 
@@ -55,12 +57,14 @@ def test_bmi(session: nox.Session) -> None:
 
 @nox.session
 def lint(session: nox.Session) -> None:
+    """Clean lint."""
     session.install("flake8")
     session.run("flake8", *PATHS)
 
 
 @nox.session
 def format(session: nox.Session) -> None:
+    """Make pretty."""
     session.install("black", "isort")
     session.run("isort", *PATHS)
     session.run("black", *PATHS)
@@ -68,6 +72,7 @@ def format(session: nox.Session) -> None:
 
 @nox.session
 def build(session: nox.Session) -> None:
+    """Make src and dist builds."""
     session.install(".[build]")
     session.run("python", "-m", "build")
     session.run("twine", "check", "dist/*")
@@ -83,6 +88,7 @@ def release(session):
 
 @nox.session(name="testpypi")
 def publish_testpypi(session: nox.Session) -> None:
+    """Build and upload to TestPyPI."""
     session.install(".[build]")
     session.run("python", "-m", "build")
     session.install("twine")
@@ -99,6 +105,7 @@ def publish_testpypi(session: nox.Session) -> None:
 
 @nox.session(name="pypi")
 def publish_pypi(session: nox.Session) -> None:
+    """Build and upload to PyPI."""
     session.install(".[build]")
     session.run("python", "-m", "build")
     session.install("twine")
@@ -113,6 +120,7 @@ def publish_pypi(session: nox.Session) -> None:
 
 @nox.session(python=False)
 def clean(session: nox.Session) -> None:
+    """Remove generated files."""
     shutil.rmtree("build", ignore_errors=True)
     shutil.rmtree("dist", ignore_errors=True)
     shutil.rmtree(f"{PACKAGE}.egg-info", ignore_errors=True)
@@ -141,5 +149,6 @@ def clean(session: nox.Session) -> None:
 
 @nox.session(python=False)
 def nuke(session: nox.Session) -> None:
+    """Clean and remove session environments."""
     clean(session)
     shutil.rmtree(".nox", ignore_errors=True)
