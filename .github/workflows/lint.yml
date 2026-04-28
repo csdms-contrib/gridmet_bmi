@@ -24,8 +24,5 @@ jobs:
       - name: Install nox
         run: pip install nox
 
-      - name: Lint code
+      - name: Lint and format code
         run: nox -s lint
-
-      - name: Format code
-        run: nox -s format
