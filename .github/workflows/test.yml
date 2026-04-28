@@ -43,6 +43,7 @@ jobs:
 
       - name: Run examples
         working-directory: ${{ github.workspace }}/examples
+        if: ${{ matrix.python-version == '3.14' }}
         run: |
           pip install -e ..
           python debug.py
