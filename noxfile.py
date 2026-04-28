@@ -2,6 +2,7 @@
 
 import os
 import shutil
+from contextlib import suppress
 from itertools import chain
 from pathlib import Path
 
@@ -57,17 +58,9 @@ def test_bmi(session: nox.Session) -> None:
 
 @nox.session
 def lint(session: nox.Session) -> None:
-    """Clean lint."""
-    session.install("flake8")
-    session.run("flake8", *PATHS)
-
-
-@nox.session
-def format(session: nox.Session) -> None:
-    """Make pretty."""
-    session.install("black", "isort")
-    session.run("isort", *PATHS)
-    session.run("black", *PATHS)
+    """Clean lint and assert style."""
+    session.install("pre-commit")
+    session.run("pre-commit", "run", "--all-files")
 
 
 @nox.session
@@ -130,15 +123,11 @@ def clean(session: nox.Session) -> None:
 
     for p in chain(ROOT.rglob("*.py[co]"), ROOT.rglob("__pycache__")):
         if p.is_dir():
-            try:
+            with suppress(OSError):
                 shutil.rmtree(p)
-            except OSError:
-                pass
         else:
-            try:
+            with suppress(OSError):
                 p.unlink()
-            except OSError:
-                pass
 
 
 @nox.session(python=False)
