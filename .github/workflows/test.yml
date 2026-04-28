@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.14"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
 
     steps:
       - uses: actions/checkout@v5
@@ -34,12 +34,12 @@ jobs:
 
       - name: Run unit tests (gridmet only, not BMI)
         run: |
-          nox -s test -- tests/test_gridmet.py
+          nox -s test -- tests/test_gridmet.py --python ${{ matrix.python-version }}
 
       - name: Test BMI
         if: ${{ matrix.python-version == '3.14' }}
         run: |
-          nox -s test-bmi
+          nox -s test-bmi --python ${{ matrix.python-version }}
 
       - name: Run examples
         working-directory: ${{ github.workspace }}/examples
