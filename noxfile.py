@@ -2,6 +2,7 @@
 
 import os
 import shutil
+from contextlib import suppress
 from itertools import chain
 from pathlib import Path
 
@@ -122,15 +123,11 @@ def clean(session: nox.Session) -> None:
 
     for p in chain(ROOT.rglob("*.py[co]"), ROOT.rglob("__pycache__")):
         if p.is_dir():
-            try:
+            with suppress(OSError):
                 shutil.rmtree(p)
-            except OSError:
-                pass
         else:
-            try:
+            with suppress(OSError):
                 p.unlink()
-            except OSError:
-                pass
 
 
 @nox.session(python=False)
