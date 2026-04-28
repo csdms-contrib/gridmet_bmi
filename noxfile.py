@@ -13,12 +13,13 @@ PACKAGE = PROJECT.replace("-", "_")
 HERE = Path(__file__)
 ROOT = HERE.parent
 PATHS = [PACKAGE, "tests", "examples", HERE.name]
+PYTHON_VERSIONS = ["3.11", "3.12", "3.13", "3.14"]
 
 # Default sessions to run when nox is called without arguments
 nox.options.sessions = ["lint", "test"]
 
 
-@nox.session
+@nox.session(python=PYTHON_VERSIONS)
 def test(session: nox.Session) -> None:
     """Run the tests."""
     session.install(".[testing]")
@@ -39,7 +40,7 @@ def test(session: nox.Session) -> None:
         session.run("coverage", "report", "--ignore-errors", "--show-missing")
 
 
-@nox.session(name="test-bmi")
+@nox.session(name="test-bmi", python=PYTHON_VERSIONS)
 def test_bmi(session: nox.Session) -> None:
     """Test the BMI with bmi-tester."""
     session.install("bmi-tester")
