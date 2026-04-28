@@ -7,11 +7,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-
   lint:
     name: Check for lint and format code to a standard style
-    if:
-      github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
 
     runs-on: ubuntu-latest
     steps:
@@ -23,10 +21,11 @@ jobs:
           python-version: 3.12
           auto-activate-base: false
 
-      - name: Install black and flake8
-        run: pip install black flake8
+      - name: Install nox
+        run: pip install nox
+
+      - name: Lint code
+        run: nox -s lint
 
       - name: Format code
-        run: |
-          flake8 .
-          black .
+        run: nox -s format

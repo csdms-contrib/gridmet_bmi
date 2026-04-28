@@ -36,20 +36,21 @@ jobs:
           conda info
           conda list
 
-      - name: Build and install package
+      - name: Install nox
         run: |
-          make install
+          pip install nox
 
-      - name: Run unit tests
+      - name: Run unit tests (gridmet only, not BMI)
         run: |
-          pytest
+          nox -s test -- tests/test_gridmet.py
 
       - name: Test BMI
         if: ${{ matrix.python-version == '3.12' }}
         run: |
-          make test-bmi
+          nox -s test-bmi
 
       - name: Run examples
         working-directory: ${{ github.workspace }}/examples
         run: |
+          pip install -e ..
           python debug.py

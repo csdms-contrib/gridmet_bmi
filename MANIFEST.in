@@ -1,4 +1,5 @@
 include *.md
+include noxfile.py
 include environment.yml
 include examples/*
 recursive-include tests *

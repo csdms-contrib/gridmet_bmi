@@ -1,6 +1,7 @@
-from gridmet_bmi import BmiGridmet
 import numpy as np
 import numpy.testing as npt
+
+from gridmet_bmi import BmiGridmet
 
 
 def print_times(x):

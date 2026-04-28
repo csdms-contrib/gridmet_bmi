@@ -51,7 +51,7 @@ Repository = "https://github.com/csdms-contrib/gridmet_bmi"
 
 [project.optional-dependencies]
 dev = [
-  "make",
+  "nox",
 ]
 build = [
   "build",
