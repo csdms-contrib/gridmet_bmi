@@ -57,17 +57,9 @@ def test_bmi(session: nox.Session) -> None:
 
 @nox.session
 def lint(session: nox.Session) -> None:
-    """Clean lint."""
-    session.install("flake8")
-    session.run("flake8", *PATHS)
-
-
-@nox.session
-def format(session: nox.Session) -> None:
-    """Make pretty."""
-    session.install("black", "isort")
-    session.run("isort", *PATHS)
-    session.run("black", *PATHS)
+    """Clean lint and assert style."""
+    session.install("pre-commit")
+    session.run("pre-commit", "run", "--all-files")
 
 
 @nox.session
